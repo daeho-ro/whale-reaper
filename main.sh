@@ -3,8 +3,15 @@
 # Whale Helper 프로세스 CPU 과점유 자동 종료 스크립트
 # ============================================================
 
+# Intel: /usr/local, Apple Silicon: /opt/homebrew
+if [[ -d "/opt/homebrew" ]]; then
+    BREW_PREFIX="/opt/homebrew"
+else
+    BREW_PREFIX="/usr/local"
+fi
+
 # 설정 파일 로드
-CONFIG_FILE="$(brew --prefix)/etc/whale-reaper/config"
+CONFIG_FILE="${BREW_PREFIX}/etc/whale-reaper/config"
 [[ -f "$CONFIG_FILE" ]] && source "$CONFIG_FILE"
 
 readonly CPU_THRESHOLD="${WHALE_CPU_THRESHOLD:-20}"
