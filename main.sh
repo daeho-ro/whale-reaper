@@ -16,10 +16,8 @@ CONFIG_FILE="${BREW_PREFIX}/etc/whale-reaper/config"
 
 readonly CPU_THRESHOLD="${WHALE_CPU_THRESHOLD:-20}"
 
-log()     { echo "[INFO]  $1"; }
-log_err() { echo "[ERROR] $1" >&2; }
-
-log "시작 (CPU 임계값: ${CPU_THRESHOLD}%)"
+log()     { echo "[$(date '+%Y-%m-%d %H:%M:%S')] [INFO]  $1"; }
+log_err() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] [ERROR] $1" >&2; }
 
 kill_process() {
     local pid="$1" cpu="$2" name="$3"
@@ -52,5 +50,3 @@ else
         kill_process "$pid" "$cpu" "$name"
     done <<< "$targets"
 fi
-
-log "종료"
